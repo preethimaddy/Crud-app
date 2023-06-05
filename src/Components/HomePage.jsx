@@ -25,7 +25,7 @@ const { name, value } = e.target;
       <Col xs={6} md={6}>
       <Form.Group className="mb-3" controlId="formfName">
         <Form.Label>First Name</Form.Label>
-        <Form.Control type="text" name="firstname" placeholder="Enter your firstname" onChange = {handleInput}/>
+        <Form.Control type="text" name="firstname" placeholder="Enter your firstname" onChange = {handleInput} value={newInput?.firstname}/>
         <Form.Text className="text-muted">
                       Enter Your First Name
                     </Form.Text>
@@ -34,7 +34,7 @@ const { name, value } = e.target;
       <Col xs={6} md={6}>
       <Form.Group className="mb-3" controlId="formlName">
         <Form.Label>Last Name</Form.Label>
-        <Form.Control type="text" name="lastname" placeholder="Enter your lastname" onChange = {handleInput} />
+        <Form.Control type="text" name="lastname" placeholder="Enter your lastname" onChange = {handleInput} value={newInput?.lastname} />
         <Form.Text className="text-muted">
                       Enter Your Last Name
                     </Form.Text>
@@ -46,7 +46,7 @@ const { name, value } = e.target;
       <Col xs={6} md={6}>
       <Form.Group className="mb-3" controlId="formbasicemail">
         <Form.Label>Email Address</Form.Label>
-        <Form.Control type="text" name="email" placeholder="Enter your email address" onChange = {handleInput}/>
+        <Form.Control type="text" name="email" placeholder="Enter your email address" onChange = {handleInput} value={newInput?.email}/>
         <Form.Text className="text-muted">
                       We will Never share your Address to Anyone Else!
                     </Form.Text>
@@ -59,6 +59,7 @@ const { name, value } = e.target;
                       name="gender"
                       onChange={handleInput}
                       className="form-select" >
+                         value={newInput?.gender}
                       <option value="">--select--</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
