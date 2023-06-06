@@ -10,10 +10,16 @@ function HomePage(props) {
   };
   const [newInput, setNewInput] = useState(initialState);
   console.log("newInput", newInput);
-  const [saveData, setsaveData] = useState(newInput);
-  console.log("newInput", newInput);
+
  const [tableRecord, setTableRecord] = useState(userData);
  console.log("TableRecord", tableRecord);
+
+ const [editInput, setEditInput] = useState();
+ console.log("editInput", editInput);
+
+
+ const [alert, setAlert] = useState(false);
+ console.log("Alert", alert)
   const handleInput =(e) =>{
 e.preventDefault ();
 const { name, value } = e.target;
@@ -23,16 +29,30 @@ const { name, value } = e.target;
   }
 
 const addData =(e) => {
-  e.preventDefault();
+  // form fields validation
+ const {firstname, lastname, email, gender} = newInput;
+ if (firstname !== "" && lastname !== "" && email !== "" && gender !== "") {
   const newData = [...tableRecord] 
   newData.push(newInput);
   setTableRecord(newData);
  setNewInput(initialState);
-
+setAlert(false)
+}else{
+  setAlert(true)
+}
 }
 
   return (
     <>
+    <div className="m-5">
+{alert &&(
+  <Alert   variant = {"danger"} dismissible  
+  className="custom-alert text-center"
+            onClick={() => setAlert(false)}>
+Please fill All mandatory fields
+  </Alert>
+)}
+    </div>
    <Container>
     <Form className="form-input-area">
       <h3 className="text-center">Add New Data Form</h3>
@@ -103,18 +123,7 @@ const addData =(e) => {
     </tr>
   
 </thead>
-<tbody>
-  {/* return(
-    <tr key={index}>
-    <td>{index+1}</td>
-    <td>{firstname}</td>
-    <td>{lastname}</td>
-    <td>{email}</td>
-    <td>{gender}</td>
-  </tr>
-  ) */}
 
-</tbody>
 </Table>
     </Row>
  
