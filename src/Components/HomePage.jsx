@@ -98,11 +98,24 @@ const addEditData =(e) => {
  
 setAlert(false);
 cancelData();
-
+edit(id)
 }else{
   setAlert(true)
 }
 };
+
+  // edit data to server
+  const edit = async (id) => {
+    try {
+      const body = editInput;
+      const result = await axios.put(
+        `https://64818d7329fa1c5c503198d5.mockapi.io/user/${id}`,
+        body
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
  
 // clear the data
@@ -134,10 +147,19 @@ const deleteTableData = (index,id) =>{
   const data =[...tableRecord];
   data.splice(index,1);
   setTableRecord(data);
-  
+  deleteData(id);
 };
 
-  
+  // function to delete all records
+  const deleteData = async (id) => {
+    try {
+      await axios.delete(
+        `https://64818d7329fa1c5c503198d5.mockapi.io/user/${id}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
     <div className="m-3">
