@@ -80,10 +80,19 @@ const addData =(e) => {
   setTableRecord(newData);
  setNewInput(initialState);
 setAlert(false);
-
+postData(newData)
 }else{
   setAlert(true)
 }
+};
+// post data
+const postData = async (newData) => {
+  const body = newInput;
+  const data = await axios.post(
+    `https://64818d7329fa1c5c503198d5.mockapi.io/user`,
+    body
+  );
+  console.log("post-data", data);
 };
 
 
