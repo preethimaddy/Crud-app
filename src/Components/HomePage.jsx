@@ -3,6 +3,7 @@ import {Container,Row,Col,Form,Button, Alert, Table} from "react-bootstrap"
 import {userData} from "../dummy/dummyData"
 import { BiEdit } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
+import axios from "axios"
 function HomePage(props) {
   const initialState = {
     firstname: "",
@@ -24,7 +25,7 @@ function HomePage(props) {
  const [editInput, setEditInput] = useState(null);
  console.log("editInput", editInput);
 
-  const [tableRecord, setTableRecord] = useState(userData);
+  const [tableRecord, setTableRecord] = useState([]);
  console.log("TableRecord", tableRecord);
 
  const [editIndex, setEditIndex] = useState(null);
@@ -32,6 +33,24 @@ function HomePage(props) {
 
  const [alert, setAlert] = useState(false);
  console.log("Alert", alert)
+
+   // function to get data
+   const getData = async () => {
+    try {
+      const data1 = await axios.get(
+        `https://64818d7329fa1c5c503198d5.mockapi.io/user`
+      );
+      const { data } = data1;
+      setTableRecord(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
  
 
  //// handle  form input function
@@ -60,16 +79,18 @@ const addData =(e) => {
   newData.push(newInput);
   setTableRecord(newData);
  setNewInput(initialState);
-setAlert(false)
+setAlert(false);
+
 }else{
   setAlert(true)
 }
 };
 
+
 /// editpage
 const addEditData =(e) => {
   // form fields validation
- const {firstname, lastname, email, gender} = editInput;
+ const {firstname, lastname, email, gender,id} = editInput;
  if (firstname !== "" && lastname !== "" && email !== "" && gender !== "") {
   const newData = [...tableRecord];
   newData[editIndex] = editInput;
@@ -77,10 +98,13 @@ const addEditData =(e) => {
  
 setAlert(false);
 cancelData();
+
 }else{
   setAlert(true)
 }
 };
+
+ 
 // clear the data
 const clearData = () => {
 setNewInput (initialState);
@@ -106,16 +130,14 @@ const editTrigger = (index) => {
   setEditIndex(index);
 };
 //Delete data from the table
-const deleteTableData = (index) =>{
+const deleteTableData = (index,id) =>{
   const data =[...tableRecord];
   data.splice(index,1);
   setTableRecord(data);
-}
+  
+};
 
-
- 
-
-
+  
   return (
     <>
     <div className="m-3">
