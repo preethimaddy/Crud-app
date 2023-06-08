@@ -71,11 +71,11 @@ const addEditData =(e) => {
   // form fields validation
  const {firstname, lastname, email, gender} = editInput;
  if (firstname !== "" && lastname !== "" && email !== "" && gender !== "") {
-  const newData = [...tableRecord] 
-  newData[editIndex] =[editInput]
-  setTableRecord(newData)
+  const newData = [...tableRecord];
+  newData[editIndex] = editInput;
+  setTableRecord(newData);
  
-setAlert(false)
+setAlert(false);
 cancelData();
 }else{
   setAlert(true)
@@ -168,15 +168,15 @@ const deleteTableData = (index) =>{
        <select
                      name="gender"
                      onChange={handleInput}
-                     className="form-select" >
-                        value={newInput?.gender}
+                     className="form-select" value={newInput?.gender} >
+                        
                      <option value="">--select--</option>
                      <option value="Male">Male</option>
                      <option value="Female">Female</option>
                      
                    </select>
        <Form.Text className="text-muted">
-                     Enter Your Last Name
+                     Please select the gender from dropdown
                    </Form.Text>
      </Form.Group>
      </Col>
@@ -198,7 +198,7 @@ const deleteTableData = (index) =>{
      <Col xs={6} md={6}>
      <Form.Group className="mb-3" controlId="formfName">
        <Form.Label>First Name</Form.Label>
-       <Form.Control type="text" name="firstname" placeholder="Enter your firstname" onChange = {handleEdit} value={newInput?.firstname}/>
+       <Form.Control type="text" name="firstname" placeholder="Enter your firstname" onChange = {handleEdit} value={editInput?.firstname}/>
        <Form.Text className="text-muted">
                      Enter Your First Name
                    </Form.Text>
@@ -207,7 +207,7 @@ const deleteTableData = (index) =>{
      <Col xs={6} md={6}>
      <Form.Group className="mb-3" controlId="formlName">
        <Form.Label>Last Name</Form.Label>
-       <Form.Control type="text" name="lastname" placeholder="Enter your lastname" onChange = {handleEdit} value={newInput?.lastname} />
+       <Form.Control type="text" name="lastname" placeholder="Enter your lastname" onChange = {handleEdit} value={editInput?.lastname} />
        <Form.Text className="text-muted">
                      Enter Your Last Name
                    </Form.Text>
@@ -219,7 +219,7 @@ const deleteTableData = (index) =>{
      <Col xs={6} md={6}>
      <Form.Group className="mb-3" controlId="formbasicemail">
        <Form.Label>Email Address</Form.Label>
-       <Form.Control type="text" name="email" placeholder="Enter your email address" onChange = {handleEdit} value={newInput?.email}/>
+       <Form.Control type="text" name="email" placeholder="Enter your email address" onChange = {handleEdit} value={editInput?.email}/>
        <Form.Text className="text-muted">
                      We will Never share your Address to Anyone Else!
                    </Form.Text>
@@ -231,8 +231,8 @@ const deleteTableData = (index) =>{
        <select
                      name="gender"
                      onChange={handleEdit}
-                     className="form-select" >
-                        value={newInput?.gender}
+                     className="form-select" value={editInput?.gender} >
+                        
                      <option value="">--select--</option>
                      <option value="Male">Male</option>
                      <option value="Female">Female</option>
