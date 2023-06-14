@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Container,Row,Col,Form,Button, Alert, Table} from "react-bootstrap"
-import {userData} from "../dummy/dummyData"
+
 import { BiEdit } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
 import axios from "axios"
@@ -71,6 +71,8 @@ const { name, value } = e.target;
       setEditInput(data);
       
     };
+
+    // updating new input to the form
 const addData =(e) => {
   // form fields validation
  const {firstname, lastname, email, gender} = newInput;
@@ -152,23 +154,25 @@ const editTrigger = (index) => {
   setEditIndex(index);
 };
 //Delete data from the table
-const deleteTableData = (index,id) =>{
+const deleteTableData = (index, id) => {
   const data =[...tableRecord];
   data.splice(index,1);
   setTableRecord(data);
-  deleteData(id);
+  deleteData (id)
 };
 
-  // function to delete all records
-  const deleteData = async (id) => {
-    try {
-      await axios.delete(
-        `https://64818d7329fa1c5c503198d5.mockapi.io/user/${id}`
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // delfunction to delete all records
+const deleteData = async (id)=> {
+  try{
+
+    await axios.delete(
+      `https://64818d7329fa1c5c503198d5.mockapi.io/user/${id}`
+    );
+
+  } catch(error){
+    console.log(error);
+  }
+};
   return (
     <>
     <div className="m-3">
@@ -326,7 +330,7 @@ const deleteTableData = (index,id) =>{
 </thead>
 <tbody>
 {tableRecord?.length > 0 &&
-                  tableRecord.map(({ firstname, lastname, email, gender }, index) => {
+                  tableRecord.map(({ firstname, lastname, email, gender, id}, index) => {
 return (
   
   <tr  key={index}>
@@ -341,7 +345,7 @@ return (
   </td >
   <td
                   className="cursor-pointer"  
-                  onClick={() => deleteTableData(index)}
+                  onClick={() => deleteTableData(index,id)}
                    
                         >
                           <MdDeleteForever />
